@@ -16,5 +16,7 @@ app.post('/', function (req, res) {
     response.success(req, res, 'ok');
 });
 
+app.use('/app', express.static('public'));
+
 app.listen(3000);
 console.log('localhost:3000')
