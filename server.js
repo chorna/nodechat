@@ -5,7 +5,7 @@ const router = require('./network/routes.js');
 let app = express();
 
 app.use(bodyParser.json());
-router(app)
+router(app);
 
 app.use('/app', express.static('public'));
 
