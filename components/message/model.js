@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const mySchema = new Schema({
+const messageSchema = new Schema({
     user: {
-        type: String,
+        type: Schema.ObjectId,
+        ref: 'User',
         required: true
     },
     message: {
@@ -15,6 +16,6 @@ const mySchema = new Schema({
 });
 
 
-const model = mongoose.model('Message', mySchema);
+const model = mongoose.model('Message', messageSchema);
 
 module.exports = model;

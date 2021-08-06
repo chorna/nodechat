@@ -6,12 +6,16 @@ addMessage = (message) => {
 };
 
 getMessages = async (filter) => {
-    const messages = await Model.find(filter);
+    const messages = await Model.find(filter)
+        .populate('user')
+        .exec();
     return messages;
 };
 
 getMessage = async (id) => {
     const message = await Model.findOne(id)
+        .populate('user')
+        .exec();
     return message;
 };
 
