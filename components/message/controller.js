@@ -19,13 +19,47 @@ addMessage = (user, message) => {
     });
 };
 
-getMessages = () => {
+getMessages = (filter) => {
     return new Promise((resolve, reject) => {
-        resolve(store.list())
-    })
+        resolve(store.list(filter))
+    });
+}
+
+getMessage = (id) => {
+    return new Promise((resolve, reject) => {
+        if (!id){
+            reject('Error');
+        }
+        resolve(store.get());
+    });
+}
+
+updateMessage = (id, data) => {
+    return new Promise(async (resolve, reject) => {
+        if (!data || !id){
+            reject('Error')
+        }
+        message = await store.updateText(id, data)
+        resolve(message)
+    });
+}
+
+deleteMessage = (id) => {
+    return new Promise(async (resolve, reject) => {
+        if (!id) {
+            reject('Error')
+        }
+        store.delete(id)
+            .then(() => resolve())
+            .catch(e => reject(e))
+
+    });
 }
 
 module.exports = {
     addMessage,
     getMessages,
+    updateMessage,
+    getMessage,
+    deleteMessage
 }
