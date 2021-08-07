@@ -18,8 +18,8 @@ router.get('/:id', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-
-    controller.addMessage(req.body.user, req.body.message)
+    console.log(req.body);
+    controller.addMessage(req.body.chat, req.body.user, req.body.message)
         .then((message) => response.success(req, res, message, 201))
         .catch(err => response.error(req, res, 'Invalid data', 400))
 

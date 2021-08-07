@@ -1,27 +1,28 @@
 const store = require('./store');
 
-addMessage = (user, message) => {
+addMessage = (chat, user, message) => {
     return new Promise((resolve, reject) => {
-        if (!user || !message){
+        console.log(chat, user, message)
+        if (!chat || !user || !message){
             return reject('Datos incorrectos');
         }
 
         const fullMessage = {
+            chat: chat,
             user: user,
             message: message,
             date: new Date()
         };
 
         store.add(fullMessage);
-        resolve(fullMessage)
-        console.log(fullMessage);
+        resolve(fullMessage);
 
     });
 };
 
 getMessages = (filter) => {
     return new Promise((resolve, reject) => {
-        resolve(store.list(filter))
+        resolve(store.list(filter));
     });
 }
 
@@ -37,10 +38,10 @@ getMessage = (id) => {
 updateMessage = (id, data) => {
     return new Promise(async (resolve, reject) => {
         if (!data || !id){
-            reject('Error')
+            reject('Error');
         }
-        message = await store.updateText(id, data)
-        resolve(message)
+        message = await store.updateText(id, data);
+        resolve(message);
     });
 }
 
