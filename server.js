@@ -1,4 +1,10 @@
 const express = require('express');
+const app = express();
+
+const server = require('http').Server(app);
+
+const cors = require('cors');
+const socket = require('./socket');
 const bodyParser = require('body-parser');
 const router = require('./network/routes.js');
 const config = require('./config.js');
@@ -11,13 +17,12 @@ const dataBase = encodeURIComponent(config.dbName);
 
 db(`mongodb+srv://${user}:${password}@${host}/${dataBase}`);
 
-
-let app = express();
-
+app.use(cors());
 app.use(bodyParser.json());
+
+socket.connect(server);
 router(app);
 
 app.use('/app', express.static('public'));
 
-app.listen(3000);
-console.log('localhost:3000')
+server.listen(3000, () => console.log('localhost:3000'));

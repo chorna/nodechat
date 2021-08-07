@@ -1,8 +1,8 @@
 const store = require('./store');
+const socket = require('../../socket').socket;
 
 addMessage = (chat, user, message) => {
     return new Promise((resolve, reject) => {
-        console.log(chat, user, message)
         if (!chat || !user || !message){
             return reject('Datos incorrectos');
         }
@@ -15,6 +15,8 @@ addMessage = (chat, user, message) => {
         };
 
         store.add(fullMessage);
+
+        socket.io.emit('message', fullMessage);
         resolve(fullMessage);
 
     });
