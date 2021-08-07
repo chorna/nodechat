@@ -1,17 +1,20 @@
 const store = require('./store');
 const socket = require('../../socket').socket;
 
-addMessage = (chat, user, message) => {
+addMessage = (chat, user, message, file) => {
     return new Promise((resolve, reject) => {
         if (!chat || !user || !message){
             return reject('Datos incorrectos');
         }
 
+        let fileUrl = file ? `http://localhost:3000/app/files/${file.filename}` : '';
+
         const fullMessage = {
             chat: chat,
             user: user,
             message: message,
-            date: new Date()
+            date: new Date(),
+            file: fileUrl
         };
 
         store.add(fullMessage);
