@@ -6,6 +6,7 @@ addMessage = (message) => {
 };
 
 getMessages = async (filter) => {
+    console.log(filter);
     const messages = await Model.find(filter)
         .populate('user')
         .exec();
